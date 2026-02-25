@@ -131,6 +131,7 @@ For each row:
 - Early sunflower and corn stand counts
 - Multi-row research plots
 - Fixed-length sampling strips (e.g., 15 ft, 20 ft, 30 ft)
+- Any row length between the 1st and 2nd mouse click on the when "Fixed row length (ft)" is set to 0
 
 ---
 
