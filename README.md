@@ -7,9 +7,13 @@ A lightweight **PySide6** desktop application for counting early-season crop sta
 - Research plot trials
 - Emergence assessment (e.g., ~7 DAE sunflower)
 - Early corn stand counts
-- High-throughput field phenotyping workflows
 
-Optimized for large TIFFs (hundreds of MB to multi-GB) with built-in pyramid support.
+**Windoes executable build of the Plot Stand Counter tool**
+No Python installation required.
+Download the zip from https://github.com/paulo-flores/plot_stand_count_exe/releases
+Extract it.
+Run sunf_count_GUI.exe.
+Tested on Windows 11 with sunflowers and corn images.
 
 ---
 
@@ -56,51 +60,6 @@ Optimized for large TIFFs (hundreds of MB to multi-GB) with built-in pyramid sup
 - Individual plot images: `plot_####_raw.png` and `plot_####_annot.png`
 
 > ⚠️ The original TIFF is **never modified** by annotations.
-
----
-
-## Installation
-
-### Requirements
-- Python 3.11 or 3.12+
-
-### Setup
-
-Create and activate a virtual environment (recommended):
-
-```bash
-python -m venv venv
-venv\Scripts\activate        # Windows
-# source venv/bin/activate   # macOS/Linux
-```
-
-Install dependencies:
-
-```bash
-pip install pyside6 rasterio opencv-python numpy scikit-image
-```
-
-Or using `requirements.txt`:
-
-```
-pyside6
-rasterio
-opencv-python
-numpy
-scikit-image
-```
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Running the Application
-
-```bash
-python Sunf_count_GUI.py
-```
 
 ---
 
@@ -168,58 +127,9 @@ For each row:
 ---
 
 ## Example Applications
-- Sunflower emergence (~7 days after planting)
-- Corn early stand counts
+- Early sunflower and corn stand counts
 - Multi-row research plots
 - Fixed-length sampling strips (e.g., 15 ft, 20 ft, 30 ft)
-
----
-
-## Screenshots
-
-> Place images in `docs/images/` and reference them below.
-
-```markdown
-![Overview](docs/images/ToolSetupOverview.jpg)
-![Plot Preview](docs/images/FourRowPlotPreviewZoom.jpg)
-```
-
----
-
-## Output Structure
-
-```
-output_folder/
-│
-├── rows.csv
-├── plots.csv
-├── annotated_overview.png
-└── plots/
-    ├── plot_0001_raw.png
-    ├── plot_0001_annot.png
-    ├── plot_0002_raw.png
-    └── ...
-```
-
----
-
-## Repository Structure
-
-```
-.
-├── Sunf_count_GUI.py
-├── README.md
-├── requirements.txt
-├── LICENSE
-└── docs/
-    └── images/
-```
-
----
-
-## License
-
-Specify your license here (e.g., MIT, Apache 2.0).
 
 ---
 
