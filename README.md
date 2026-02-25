@@ -8,7 +8,7 @@ A lightweight **PySide6** desktop application for counting early-season crop sta
 - Emergence assessment (e.g., ~7 DAE sunflower)
 - Early corn stand counts
 
-**Windoes executable build of the Plot Stand Counter tool**
+**Windows executable build of the Plot Stand Counter tool**
 No Python installation required.
 Download the zip from https://github.com/paulo-flores/plot_stand_count_exe/releases
 Extract it.
