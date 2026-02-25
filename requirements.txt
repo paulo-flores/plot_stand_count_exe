@@ -1,0 +1,5 @@
+pyside6
+rasterio
+opencv-python
+numpy
+scikit-image
