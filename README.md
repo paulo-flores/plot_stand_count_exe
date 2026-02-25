@@ -5,15 +5,16 @@ A lightweight **PySide6** desktop application for counting early-season crop sta
 
 **Designed for:**
 - Research plot trials
-- Emergence assessment (e.g., ~7 DAE sunflower)
+- Early sunflower stands assessment
 - Early corn stand counts
+- It will likely work for other crops as well, which might require to change some of the default parameters showing on the GUI.
 
 **Windows executable build of the Plot Stand Counter tool**
-No Python installation required.
-Download the zip from https://github.com/paulo-flores/plot_stand_count_exe/releases
-Extract it.
-Run sunf_count_GUI.exe.
-Tested on Windows 11 with sunflowers and corn images.
+- No Python installation required
+- Download the zip from https://github.com/paulo-flores/plot_stand_count_exe/releases
+- Extract it
+- Run sunf_count_GUI.exe
+- Tested on Windows 11 with sunflowers and corn images
 
 ---
 
