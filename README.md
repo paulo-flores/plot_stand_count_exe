@@ -71,6 +71,30 @@ A lightweight **PySide6** desktop application for counting early-season crop sta
 - Added global perpendicular offset control
 - Continued support for manual row mode, tidy CSV outputs, and GeoTIFF overview creation
 
+- **✨ New v0.3.0**
+**Auto-Grid Row Generation**
+Rows can now be automatically propagated across replicated plots using forward and backward grid segments, reducing manual clicking during plot setup.
+
+**Inter-Segment Gap Support**
+Users can define alleys or spacing between replicated plots, allowing more accurate representation of experimental layouts.
+
+**Parallel Processing**
+Row detection and counting are now processed in parallel, significantly improving preview and computation speed.
+
+**Interactive Plot Analytics**
+Accepted plots now include dynamic chart popups:
+- Hover over a plot to view stand counts.
+- Double-click a plot to pin the chart for closer inspection.
+
+**Segment-Level Visualization**
+Auto-grid plots now generate separate charts for each segment, providing cleaner comparisons between replicated areas.
+
+**Cleaner Overview Visualization**
+The interface now removes clutter from the overview image. Detection counts are displayed in charts instead of being printed on the imagery.
+
+**Improved Interface Layout**
+The parameter panel is now scrollable, preventing UI compression when the window is resized or maximized.
+
 ---
 
 ## Workflow
@@ -86,87 +110,99 @@ A lightweight **PySide6** desktop application for counting early-season crop sta
 This ensures smooth navigation on large images.
 
 ### 3. Row Selection Modes
-The tools supports two row selection modes
-### Manual Row Mode
-### Procedure
-1. Set:
-Row input mode → Manual rows
+## Row Input Modes
+The Stand Count Tool provides three methods for defining the rows used in stand counting. Each mode is designed for a different type of field layout or workflow.
 
-2. Specify:
-Rows per plot
+ **_Manual Rows Mode_**
+_How it works:_
+The user manually defines each row within a plot by clicking the start and end points of every row on the orthomosaic image.
+  1. Select **Manual rows** from the *Row input mode* dropdown.
+  2. Set the **Rows per plot** value.
+  3. For each row:
+   * Click the **start point** of the row.
+   * Click the **end point** of the row.
+  4. After all rows are defined, the tool will compute the preview automatically.
+  5. Review the detection results and either:
+   * **Accept / Save** the plot, or
+   * **Discard** and redraw.
+  **Example**
+    For a 4-row plot:
+    * 8 clicks are required (2 clicks per row).
 
-3. For each row:
-- Click row start
-- Click row end
+**_Auto-Parallel Rows Mode_**
+_How it works:_
+The user draws **one reference row**, and the tool automatically generates additional rows on both sides using the specified **row spacing**.
+  1. Select **Auto-parallel rows** mode.
+  2. Click the **start and end point of a reference row**.
+  3. Specify:
+   * **Rows on side A**
+   * **Rows on side B**
+  4. Optionally enable **Include reference row**.
+  5. The tool generates the remaining rows automatically.
 
-4. Repeat until all rows are defined.
+  **Example**
+  If:
+    * Rows on side A = 2
+    * Rows on side B = 2
+    * Include reference row = enabled
+  The tool generates **5 rows total**.
 
-Example:
-For a 4-row plot:8 clicks total
+_**Auto-Grid Rows Mode**_
+_How it works:_
+The user draws **one reference row**, and the tool automatically generates:
+  * Parallel rows across the plot width
+  * Additional **segments forward and backward** along the row direction
 
-### Auto-Parallel Row Mode (New Feature)
-Auto-parallel mode speeds up plot setup by generating multiple rows automatically.
-The user only selects one reference row, and the tool generates parallel rows using the row spacing.
+Can be used to create a **grid of replicated plots**.
 
-### How it works?
-Auto-Parallel Row Mode (New Feature)
+  1. Select **Auto-grid rows** mode.
+  2. Click the **start and end point of a reference row**.
+  3. Define rows across the plot:
+     * **Rows on side A**
+     * **Rows on side B**
+  4. Define replicated segments:
+     * **Segments forward**
+     * **Segments backward**
+  5. Set the **segment spacing**, or enable:
+     * **Use row length as segment spacing**
+  6. Optionally define an **inter-segment gap** to account for alleys between plots.
+    **Example**
+      If:
+        * Rows on side A = 2
+        * Rows on side B = 2
+        * Include reference row = enabled
+        * Segments forward = 2
+        * Segments backward = 2
+      The tool generates:
+        * **5 rows per segment**
+        * **5 segments total**
+        Total rows analyzed = **25 rows**.
 
-Auto-parallel mode speeds up plot setup by generating multiple rows automatically.
 
-1. Select:
-Row input mode → Auto-parallel rows
 
-2. Define:
-Parameter	                  Description
-Rows on side A                Number of rows generated on one side
-Rows on side B	               Rows generated on the other side
-Include reference row	      Include the clicked row in the plot
-Row spacing	                  Distance between rows
-Global offset	               Adjust alignment if rows are slightly shifted
+### Step 4 — Compute preview
 
-Example
-If you set:
-- Rows side A = 5
-- Rows side B = 5
-- Include reference row = true
-- Total rows counted: 11 rows
-- Only two clicks are required.
-
-### Step 3 — Compute preview
-
-After selecting rows, click:
-
-Compute Preview
+After selecting rows, click: Compute Preview
 
 The tool will:
-
-Extract the plot region
-
-Detect plants
-
-Estimate clusters
-
-Display detection results
+  Extract the plot region
+  Detect plants
+  Estimate clusters
+  Display detection results
 
 You can inspect the detection results before saving.
 
-### Step 4 — Inspect detection results
+### Step 5 — Inspect detection results
 
-Click:
-
-Show Preview
+Click: Show Preview
 
 This displays:
+  detected plants
+  flagged clusters
+  row boundaries
+  plant counts
 
-detected plants
-
-flagged clusters
-
-row boundaries
-
-plant counts
-
-### Step 5 — Accept or discard
+### Step 6 — Accept or discard
 Keyboard shortcuts:
 
 Key	      Action
@@ -215,13 +251,9 @@ annotated_overview.png: Overview of the entire field with all saved plots drawn.
 
 ### Tips for Best Results
 Use high resolution imagery: Recommended 1–3 cm/pixel
-
 Ensure good lighting conditions: images captured under consistent lighting, minimal shadows, produce better detection results.
-
 Adjust cluster factor if needed
-
 Large plants or overlapping plants may be detected as clusters.
-
 The cluster factor parameter controls when plants are considered multiples. Typical values: 1.2 – 1.6
 
 ### Troubleshooting
